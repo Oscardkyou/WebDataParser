@@ -27,6 +27,10 @@ class HarrodsSpider(scrapy.Spider):
             item['brand'] = product.css('span.product-brand::text').get()
             item['price'] = product.css('span.product-price::text').get()
             item['description'] = product.css('span.product-summary::text').get()
+            item['sizes'] = product.css('div.size-dropdown option::text').getall()
+            item['color'] = product.css('span.selected-colour::text').get()
+            item['quantity'] = 'N/A'  # Harrods doesn't typically show quantity
+            item['details'] = product.css('div.product-details p::text').getall()
             yield item
 
         next_page = response.css('a.pagination__arrow--next::attr(href)').get()

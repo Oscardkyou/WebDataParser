@@ -16,17 +16,21 @@ class StockXSpider(scrapy.Spider):
                 url=url,
                 callback=self.parse,
                 wait_time=30,
-                wait_until=EC.presence_of_element_located((By.CSS_SELECTOR, 'div.css-111hzm2'))
+                wait_until=EC.presence_of_element_located((By.CSS_SELECTOR, 'div[data-testid="product-tile"]'))
             )
 
     def parse(self, response):
-        products = response.css('div.css-111hzm2')
+        products = response.css('div[data-testid="product-tile"]')
         for product in products:
             item = ProductItem()
-            item['name'] = product.css('p.chakra-text.css-3lpefb::text').get()
-            item['brand'] = product.css('p.chakra-text.css-1juslt3::text').get()
-            item['price'] = product.css('p.chakra-text.css-nzy192::text').get()
-            item['description'] = product.css('p.chakra-text.css-1l3zk6f::text').get()
+            item['name'] = product.css('p[data-testid="product-name"]::text').get()
+            item['brand'] = product.css('p[data-testid="product-brand"]::text').get()
+            item['price'] = product.css('p[data-testid="product-price"]::text').get()
+            item['description'] = product.css('p[data-testid="product-description"]::text').get()
+            item['sizes'] = product.css('div[data-testid="product-size"] span::text').getall()
+            item['color'] = product.css('div[data-testid="product-color"]::text').get()
+            item['quantity'] = 'N/A'  # StockX doesn't typically show quantity
+            item['details'] = product.css('div[data-testid="product-details"] p::text').getall()
             yield item
 
         next_page = response.css('a[data-testid="pagination-next-page"]::attr(href)').get()
@@ -35,5 +39,5 @@ class StockXSpider(scrapy.Spider):
                 url=response.urljoin(next_page),
                 callback=self.parse,
                 wait_time=30,
-                wait_until=EC.presence_of_element_located((By.CSS_SELECTOR, 'div.css-111hzm2'))
+                wait_until=EC.presence_of_element_located((By.CSS_SELECTOR, 'div[data-testid="product-tile"]'))
             )
