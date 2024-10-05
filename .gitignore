@@ -10,6 +10,7 @@ __pycache__/
 .config/
 .upm/
 .pythonlibs/
+replit.nix  # Added
 
 # Environment and package management
 venv/
@@ -17,7 +18,7 @@ env/
 *.env
 .python-version
 poetry.lock
-pyproject.toml
+# Removed: pyproject.toml
 
 # Logs and databases
 *.log
@@ -39,11 +40,15 @@ Thumbs.db
 # Project specific
 output/*
 !output/.gitkeep
-*.json
-*.csv
+# Removed: *.json
+# Removed: *.csv
 
 # Temporary files
 *.tmp
 *.bak
 *.swp
 *~
+
+# Added files
+generated-icon.png
+Pasted---1728121825541.txt
