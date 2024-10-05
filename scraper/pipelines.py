@@ -1,12 +1,15 @@
 import json
 import csv
+import os
 from itemadapter import ItemAdapter
 from utils.data_cleaner import clean_data
+from config import OUTPUT_FOLDER
 
 class ScraperPipeline:
     def __init__(self):
-        self.json_file = open('output.json', 'w')
-        self.csv_file = open('output.csv', 'w', newline='')
+        os.makedirs(OUTPUT_FOLDER, exist_ok=True)
+        self.json_file = open(os.path.join(OUTPUT_FOLDER, 'output.json'), 'w')
+        self.csv_file = open(os.path.join(OUTPUT_FOLDER, 'output.csv'), 'w', newline='')
         self.csv_writer = csv.writer(self.csv_file)
         self.csv_writer.writerow(['name', 'brand', 'price', 'sizes', 'color', 'description', 'details', 'quantity'])
 

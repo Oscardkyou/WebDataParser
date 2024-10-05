@@ -37,7 +37,8 @@ Thumbs.db
 .idea/
 
 # Project specific
-output/
+output/*
+!output/.gitkeep
 *.json
 *.csv
 
