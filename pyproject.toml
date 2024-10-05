@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "repl-nix-attachmentanalyzer-2"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+trafilatura = "^1.12.2"
+playwright = "^1.47.0"
+scrapy = "^2.11.2"
+aiohttp = "^3.10.9"
+scrapy-playwright = "^0.0.41"
+fake-useragent = "^1.5.1"
+selenium = "^4.25.0"
+undetected-chromedriver = "^3.5.5"
+scrapy-selenium = "^0.0.7"
+scrapy-user-agents = "^0.1.1"
+scrapy-rotating-proxies = "^0.6.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
